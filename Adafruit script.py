@@ -5,8 +5,8 @@ import pyfirmata
   
 
 #Sette opp brukernamn og key til og være klienten
-ADAFRUIT_IO_USERNAME = ""
-ADAFRUIT_IO_KEY =  ""
+ADAFRUIT_IO_USERNAME = "mjente" 
+ADAFRUIT_IO_KEY = ""  
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY) 
   
 board = pyfirmata.Arduino('COM4') 
@@ -22,12 +22,16 @@ while True:
         #Lese av analog og digitalt input
         print("running") 
         data = aio.receive(aio.feeds('digital').key) 
-        data2 = aio.send(aio.feeds('analog').key, analog_input.read()) 
+        aio.send(aio.feeds('analog').key, analog_input.read()) 
+        data2 = aio.receive(aio.feeds("sped").key)
   
-        #Lyset på arduinoen av og på
+        #Lyset på arduinoen av og på, value som bestemme kor lenge den e på
         if data.value == "1": 
             digital_output.write(1) 
-            print("LED ON") 
+            time.sleep(int(data2.value)/100)
+            digital_output.write(0)
+            time.sleep(int(data2.value)/100)
+            print("LED BLINKY BOI") 
         else: 
             digital_output.write(0) 
             print("LED OFF") 
