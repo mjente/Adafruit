@@ -5,8 +5,8 @@ import pyfirmata
   
 
 #Sette opp brukernamn og key til og være klienten
-ADAFRUIT_IO_USERNAME = "mjente" 
-ADAFRUIT_IO_KEY = "aio_qvSe07WEZ1ZtbXQXPDoD7f9emtcl"  
+ADAFRUIT_IO_USERNAME = ""
+ADAFRUIT_IO_KEY =  ""
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY) 
   
 board = pyfirmata.Arduino('COM4') 
